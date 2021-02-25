@@ -76,10 +76,14 @@ class RegisterController extends Controller
             $user->attachRole('administrator');
             //Ruolo amministratore impianto scii
 
+            $this->redirectTo = '/admin';
+
         }
         else{
             $user->attachRole('user');
             //Ruolo cliente impianto scii
+
+            $this->redirectTo = '/cliente';
         }
     
         return $user;

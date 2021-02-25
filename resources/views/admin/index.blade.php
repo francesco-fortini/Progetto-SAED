@@ -14,7 +14,8 @@
                         </div>
                     @endif
 
-                    {{ __('Benvenuto! Sei loggato come admin') }}
+                    {{ __('Benvenuto! Sei loggato come admin') }}<br><br><br>
+                    {{var_dump(Auth::user()->hasRole('administrator'))}}
                 </div>
             </div>
         </div>
