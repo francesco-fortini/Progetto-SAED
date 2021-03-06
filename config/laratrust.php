@@ -136,6 +136,7 @@ return [
         /**
          * User foreign key on Laratrust's role_user and permission_user tables.
          */
+        //'user' => 'user_id',
         'user' => 'user_id',
 
         /**
