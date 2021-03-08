@@ -83,13 +83,27 @@ class ApiController extends Controller
     }
 
     public function iscrizione(Request $request){
-        
+
         $iscrizione = new Iscrizione();
 
-        $iscrizione->idCorso = $request->input('idCorso');
-        $iscrizione->idUtente = $request->input('idUtente');
+        $currernt_membri = DB::table('corsoscii')
+            ->select('corsoscii.membriMax')
+            ->value('membriMax');
+        
+        if($currernt_membri == 0){
+            
+        }
+        else{
 
-        $iscrizione->save();
+            $iscrizione->idCorso = $request->input('idCorso');
+            $iscrizione->idUtente = $request->input('idUtente');
+
+            $iscrizione->save();
+
+            DB::table('corsoscii')->where('idCorso', $iscrizione->idCorso)
+                ->decrement('membriMax', 1);
+        }
+
         return response()->json($iscrizione);
 
     }
@@ -104,6 +118,16 @@ class ApiController extends Controller
     public function deleteiscrizione($idUtente){
 
         $iscrizione_scii = Iscrizione::where('idUtente', $idUtente)->first();
+
+        $select_current_id = DB::table('corsoscii')
+            ->select('corsoscii.idCorso')
+            ->join('iscrizione', 'iscrizione.idCorso', '=', 'corsoscii.idCorso')
+            ->where('iscrizione.idUtente', $idUtente)
+            ->value('idCorso');
+        
+        DB::table('corsoscii')->where('idCorso', $select_current_id)
+            ->increment('membriMax', 1);
+
         $iscrizione_scii->delete();
 
         return response()->json($iscrizione_scii);

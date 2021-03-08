@@ -24,4 +24,7 @@ Auth::routes();
 Route::get('/cliente', [App\Http\Controllers\ClienteController::class, 'index'])->name('cliente');
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 
+Route::post('/cancella/{id}', [App\Http\Controllers\ClienteController::class, 'delete'])->name('cancellautente');
+
+
 Auth::routes();
