@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class CorsoScii extends Model
 {
@@ -11,5 +12,6 @@ class CorsoScii extends Model
 
     protected $primaryKey = 'idCorso';
     protected $table = 'corsoscii';
-    protected $fillable = ['tipo','nome', 'membriMax', 'inizio', 'fine'];
+    protected $fillable = ['tipo','nome', 'membriMax', 'orario_inizio', 'orario_fine', 'inizio', 'fine'];
+    
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 
 //Operazioni di gestione e creazione corso scii per maestri
 Route::post('/tipo', [App\Http\Controllers\ApiController::class, 'createtipo']);
@@ -30,3 +34,5 @@ Route::delete('/deletecorso/{idCorso}', [App\Http\Controllers\ApiController::cla
 Route::post('/iscrizione', [App\Http\Controllers\ApiController::class, 'iscrizione']);
 Route::get('/vedicorso/{idCorso}', [App\Http\Controllers\ApiController::class, 'vedicorso']);
 Route::delete('/deleteiscrizione/{idUtente}', [App\Http\Controllers\ApiController::class, 'deleteiscrizione']);
+
+Auth::routes();
